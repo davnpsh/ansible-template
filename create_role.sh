@@ -12,7 +12,7 @@ read -rp "Enter tags (separate by commas; leave blank for none) > " TAGS
 
 BECOME_LINE=""
 if [ "$USE_BECOME" = "y" ]; then
-    BECOME_LINE="      become: yes"
+    BECOME_LINE="\n      become: yes"
 fi
 
 echo -e "    - role: $ROLE_NAME$BECOME_LINE" >>setup.yml
