@@ -12,15 +12,15 @@ read -rp "Enter tags (separate by commas; leave blank for none) > " TAGS
 
 BECOME_LINE=""
 if [ "$USE_BECOME" = "yes" ]; then
-    BECOME_LINE="\t\t\tbecome: yes"
+    BECOME_LINE="      become: yes"
 fi
 
-echo -e "\t\t- role: $ROLE_NAME$BECOME_LINE" >>setup.yml
+echo -e "    - role: $ROLE_NAME$BECOME_LINE" >>setup.yml
 
 if [[ -n "$TAGS" ]]; then
-    echo -e "\t\t\ttags:" >>setup.yml
+    echo -e "      tags:" >>setup.yml
     # Prepare the tags line
-    TAGS_LINE="        - ${TAGS//,/\\n\t\t\t\t- }"
+    TAGS_LINE="        - ${TAGS//,/\\n        - }"
     echo -e "$TAGS_LINE" >>setup.yml
 fi
 
