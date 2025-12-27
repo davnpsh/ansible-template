@@ -11,7 +11,7 @@ USE_BECOME=$(echo "$USE_BECOME" | tr '[:upper:]' '[:lower:]')
 read -rp "Enter tags (separate by commas; leave blank for none) > " TAGS
 
 BECOME_LINE=""
-if [ "$USE_BECOME" = "yes" ]; then
+if [ "$USE_BECOME" = "y" ]; then
     BECOME_LINE="      become: yes"
 fi
 
