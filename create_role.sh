@@ -10,8 +10,6 @@ USE_BECOME=$(echo "$USE_BECOME" | tr '[:upper:]' '[:lower:]')
 
 read -rp "Enter tags (separate by commas; leave blank for none) > " TAGS
 
-echo "" >>setup.yml
-
 BECOME_LINE=""
 if [ "$USE_BECOME" = "y" ]; then
     BECOME_LINE="      become: yes"
@@ -26,4 +24,7 @@ if [[ -n "$TAGS" ]]; then
     echo -e "$TAGS_LINE" >>setup.yml
 fi
 
+echo "" >>setup.yml
+
+echo ""
 echo "> Role '$ROLE_NAME' created!"
