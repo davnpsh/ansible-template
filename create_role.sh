@@ -2,7 +2,7 @@
 
 read -rp "Role name > " ROLE_NAME
 
-mkdir -p "roles/$ROLE_NAME/{tasks,handlers,files}"
+mkdir -p "roles/$ROLE_NAME"/{tasks,handlers,files}
 
 read -rp "Become super-user? [y/N]: " USE_BECOME
 
