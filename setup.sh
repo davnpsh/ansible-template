@@ -12,7 +12,7 @@ fi
 echo "Creating directories and files..."
 
 mkdir "$PROJECT_NAME"
-cd "$PROJECT_NAME"
+cd "$PROJECT_NAME" || exit 1
 
 # files
 touch ansible.cfg hosts secrets.yml secrets.example.yml setup.yml
@@ -34,6 +34,7 @@ echo -e "- hosts: main
 echo "> Created basic project structure!"
 
 # fetch role creator script
+echo ""
 echo "Downloading role creator script..."
 
 wget "$CREATE_ROLE_SCRIPT_URL" -O create_role.sh >/dev/null 2>&1
@@ -42,6 +43,7 @@ chmod +x create_role.sh
 echo "> Downloaded role creator script!"
 
 # ask if venv
+echo ""
 read -rp "Create virtual environment? [y/N]: " response
 
 response=$(echo "$response" | tr '[:upper:]' '[:lower:]')
@@ -59,12 +61,14 @@ if [ "$response" = "y" ]; then
     echo "> Created virtual environment with Python!"
 
     # activate
+    echo ""
+    echo "Installing Ansible..."
     source .venv/bin/activate
 
     pip install ansible >/dev/null 2>&1
 
     if pip show ansible >/dev/null 2>&1; then
-        :
+        echo "> Ansible installed!"
     else
         echo "Failed to install Ansible." >&2
         exit 1
@@ -72,6 +76,7 @@ if [ "$response" = "y" ]; then
 fi
 
 # ask if git
+echo ""
 read -rp "Initialize git? [y/N]: " response
 
 response=$(echo "$response" | tr '[:upper:]' '[:lower:]')
@@ -82,6 +87,11 @@ if [ "$response" = "y" ]; then
     echo ".venv" >.gitignore
 
     echo "> Git initialized!"
+fi
+
+if command -v tree >/dev/null 2>&1; then
+    echo ""
+    tree
 fi
 
 echo -e "\nDO NOT FORGET to fill the hosts file!\nEach line should contain a hostname and should be accessible by simply doing 'ssh [host]'"
